@@ -464,25 +464,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- # ES6学习笔记 -->
-<details>
->解构赋值
+        <details>
 
+<blockquote>
+<p>解构赋值</p>
+</blockquote>
 <blockquote>
 <p>箭头函数</p>
 </blockquote>
 <ul>
-<li>箭头函数的表现形式<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fun = <span class="function">(<span class="params">a,b</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a,b);</span><br><span class="line">  <span class="keyword">return</span>  a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>箭头函数简写<ul>
+<li><p>箭头函数的表现形式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fun = <span class="function">(<span class="params">a,b</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a,b);</span><br><span class="line">  <span class="keyword">return</span>  a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>箭头函数简写</p>
+<ul>
 <li>箭头函数只有一个参数可以省略 <strong>()</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fun = <span class="function"><span class="params">a</span> =&gt;</span>&#123;<span class="keyword">return</span> a + a;&#125;</span><br><span class="line">fun(<span class="number">2</span>)</span><br><span class="line"><span class="comment">//执行结果为4</span></span><br></pre></td></tr></table></figure></li>
 <li>箭头函数的函数体只有一行表达式可以省略代码块的 <strong>{}</strong>,省略代码快的同时 <strong>return</strong> 也必须一起省略，这是代码的执行结果为函数的返回值<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fun = <span class="function"><span class="params">a</span> =&gt;</span> a + a;</span><br><span class="line">fun(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//执行结果为 4</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li>箭头函数this指向问题<ul>
-<li>箭头函数的<strong>this</strong>指向函数创建时的this，并且这个this指向是静态的，不会根据函数的调用者改变，同时也不能使用call apply bundle 来改变this的指向</li>
+<li><p>箭头函数this指向问题</p>
+<ul>
+<li><p>箭头函数的<strong>this</strong>是静态的，并且指向函数声明时所在作用域下的<strong>this</strong>，不会根据函数的调用者改变，同时也不能使用<strong>call</strong> <strong>apply</strong> 来改变<strong>this</strong>的指向</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">const</span> name = <span class="string">"common"</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.name) </span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">let</span> getNewName =<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line"> &#125;</span><br><span class="line"> getName();<span class="comment">//  common</span></span><br><span class="line"> getNewName();<span class="comment">//common </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> student = &#123;</span><br><span class="line">  name:<span class="string">"new common"</span></span><br><span class="line">&#125;</span><br><span class="line">getName.call(student);<span class="comment">//new common</span></span><br><span class="line">getNewName.call(student);<span class="comment">//nwe common</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li>箭头函数的适用场景和不适用场景<ul>
+<li><p>箭头函数不能作为构造函数实例化对象</p>
+</li>
+<li><p>箭头函数不能使用arguments的参数</p>
+</li>
+<li><p>箭头函数的适用场景和不适用场景</p>
+<ul>
 <li>箭头函数一般适用于和this指向无关的应用</details>
 </li>
 </ul>
