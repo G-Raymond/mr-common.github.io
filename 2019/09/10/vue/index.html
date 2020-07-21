@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>手写vue数据绑定-数据劫持 | common-blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="手写vue数据绑定-数据劫持之前阅读vue源代码的时候对vue双向数据绑定的原理基本上已经了解，但是没有自己写过相关代码，这次参考了一些网络教程决定手写一遍，增强自己对vue的理解，本次主要是对数据的数据劫持做一次学习记录。   讲到vue的数据绑定大家基本上都知道使用对象的defineProperty方法来重新写set和get方法进行数据的数据劫持，对象是如此，对于数组却不能，所以数组一般是通过">
+  <meta name="description" content="查看全部                    之前阅读vue源代码的时候对vue双向数据绑定的原理基本上已经了解，但是没有自己写过相关代码，这次参考了一些网络教程决定手写一遍，增强自己对vue的理解，本次主要是对数据的数据劫持做一次学习记录。   讲到vue的数据绑定大家基本上都知道使用对象的defineProperty方法来重新写set和get方法进行数据的数据劫持">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手写vue数据绑定-数据劫持">
 <meta property="og:url" content="http://yoursite.com/2019/09/10/vue/index.html">
 <meta property="og:site_name" content="common-blog">
-<meta property="og:description" content="手写vue数据绑定-数据劫持之前阅读vue源代码的时候对vue双向数据绑定的原理基本上已经了解，但是没有自己写过相关代码，这次参考了一些网络教程决定手写一遍，增强自己对vue的理解，本次主要是对数据的数据劫持做一次学习记录。   讲到vue的数据绑定大家基本上都知道使用对象的defineProperty方法来重新写set和get方法进行数据的数据劫持，对象是如此，对于数组却不能，所以数组一般是通过">
+<meta property="og:description" content="查看全部                    之前阅读vue源代码的时候对vue双向数据绑定的原理基本上已经了解，但是没有自己写过相关代码，这次参考了一些网络教程决定手写一遍，增强自己对vue的理解，本次主要是对数据的数据劫持做一次学习记录。   讲到vue的数据绑定大家基本上都知道使用对象的defineProperty方法来重新写set和get方法进行数据的数据劫持">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-09-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-07-16T09:29:59.974Z">
-<meta property="article:author" content="高萌">
+<meta property="article:modified_time" content="2020-07-20T08:52:25.588Z">
+<meta property="article:author" content="common">
 <meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
   
@@ -51,19 +51,13 @@
 			<img src="" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">高萌</a></h1>
+		  <h1 class="header-author"><a href="/">common</a></h1>
 		</hgroup>
 		
 
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/">home</a></li>
-	        
-				<li><a href="/categories">categories</a></li>
-	        
-				<li><a href="/archives">archives</a></li>
-	        
 				<li><a href="/">主页</a></li>
 	        
 				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
@@ -111,16 +105,10 @@
 				<img src="" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">高萌</h1>
+			  <h1 class="header-author js-header-author">common</h1>
 			</hgroup>
 			
 			
-			
-				
-			
-				
-			
-				
 			
 				
 			
@@ -143,18 +131,12 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 20%"><a href="/">home</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/categories">categories</a></li>
-		        
-					<li style="width: 20%"><a href="/archives">archives</a></li>
-		        
-					<li style="width: 20%"><a href="/">主页</a></li>
-		        
-					<li style="width: 20%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -189,40 +171,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="手写vue数据绑定-数据劫持"><a href="#手写vue数据绑定-数据劫持" class="headerlink" title="手写vue数据绑定-数据劫持"></a>手写vue数据绑定-数据劫持</h1><h3 id="之前阅读vue源代码的时候对vue双向数据绑定的原理基本上已经了解，但是没有自己写过相关代码，这次参考了一些网络教程决定手写一遍，增强自己对vue的理解，本次主要是对数据的数据劫持做一次学习记录。"><a href="#之前阅读vue源代码的时候对vue双向数据绑定的原理基本上已经了解，但是没有自己写过相关代码，这次参考了一些网络教程决定手写一遍，增强自己对vue的理解，本次主要是对数据的数据劫持做一次学习记录。" class="headerlink" title="之前阅读vue源代码的时候对vue双向数据绑定的原理基本上已经了解，但是没有自己写过相关代码，这次参考了一些网络教程决定手写一遍，增强自己对vue的理解，本次主要是对数据的数据劫持做一次学习记录。"></a>之前阅读vue源代码的时候对vue双向数据绑定的原理基本上已经了解，但是没有自己写过相关代码，这次参考了一些网络教程决定手写一遍，增强自己对vue的理解，本次主要是对数据的数据劫持做一次学习记录。</h3><details>
-
+        <div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        查看全部
+    </div>
+    <div class='spoiler-content'>
+        <blockquote>
+<p>之前阅读vue源代码的时候对vue双向数据绑定的原理基本上已经了解，但是没有自己写过相关代码，这次参考了一些网络教程决定手写一遍，增强自己对vue的理解，本次主要是对数据的数据劫持做一次学习记录。</p>
+</blockquote>
 <blockquote>
 <p>讲到vue的数据绑定大家基本上都知道使用对象的defineProperty方法来重新写set和get方法进行数据的数据劫持，对象是如此，对于数组却不能，所以数组一般是通过重写能够改变原数组的方法进行数据劫持的，例如push、pop、shift、unshift等。我们先来学习一下defineProperty是如何实现数据的监听</p>
 </blockquote>
 <h3 id="当我们创建vue实列的时候，initstate方法中会判断我们传入的参数进行逐个监听的"><a href="#当我们创建vue实列的时候，initstate方法中会判断我们传入的参数进行逐个监听的" class="headerlink" title="当我们创建vue实列的时候，initstate方法中会判断我们传入的参数进行逐个监听的"></a>当我们创建vue实列的时候，initstate方法中会判断我们传入的参数进行逐个监听的</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initState</span>(<span class="params">vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> opts = vm.$options;</span><br><span class="line">    <span class="keyword">if</span> (opts.props) &#123;</span><br><span class="line">        initProps(vm);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (opts.methods) &#123;</span><br><span class="line">        initMethod(vm);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (opts.data) &#123;</span><br><span class="line">        initData(vm);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (opts.computed) &#123;</span><br><span class="line">        initComputed(vm);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (opts.watch) &#123;</span><br><span class="line">        initWatch(vm);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="我们主要对initData进行分析"><a href="#我们主要对initData进行分析" class="headerlink" title="我们主要对initData进行分析"></a>我们主要对initData进行分析</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initData</span>(<span class="params">vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> data = vm.$options.data;</span><br><span class="line">    data = vm._data = <span class="keyword">typeof</span> data === <span class="string">"function"</span> ? data.call(vm) : data;</span><br><span class="line">    observe(data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在initData中我们会获取到传入的data数据，判断data是方法还是其他对象，如果是方法我们通过vm这个vue实列去调用该方法，获取返回值，交给observe监听器去进行数据的监听，如果不是方法直接交给observe进行数据的监听</p>
-</blockquote>
+### 我们主要对initData进行分析
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initData</span>(<span class="params">vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> data = vm.$options.data;</span><br><span class="line">    data = vm._data = <span class="keyword">typeof</span> data === <span class="string">"function"</span> ? data.call(vm) : data;</span><br><span class="line">    observe(data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+> 在initData中我们会获取到传入的data数据，判断data是方法还是其他对象，如果是方法我们通过vm这个vue实列去调用该方法，获取返回值，交给observe监听器去进行数据的监听，如果不是方法直接交给observe进行数据的监听
+
+
 <blockquote>
 <p>然后我们来看一下observe拿到我给的data数据是如何处理的</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observe</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.walk(value);</span><br><span class="line">    &#125;</span><br><span class="line">    walk(data) &#123;</span><br><span class="line">        <span class="keyword">let</span> keys = <span class="built_in">Object</span>.keys(data);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; keys.length; i++) &#123;</span><br><span class="line">            <span class="keyword">let</span> key = keys[i];</span><br><span class="line">            <span class="keyword">let</span> value = data[key];</span><br><span class="line">            defineReactive(data, key, value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>observe在构造函数中拿到data数据会执行自身的walk方法，walk方法的主要作用就是循环遍历当前的对象取出key和value 然后执行defineReactive函数。</p>
-</blockquote>
+> observe在构造函数中拿到data数据会执行自身的walk方法，walk方法的主要作用就是循环遍历当前的对象取出key和value 然后执行defineReactive函数。
+
 <blockquote>
 <p>defineReactive这个函数是vue数据劫持的核心函数，其中使用的大家耳熟能详的Object.defineProperty。defineProperty的作用就是重写对象的get和set方法在数据发生改变的时候可以拿到数据的新值。</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">data, key, value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(data, key, &#123;</span><br><span class="line">        <span class="keyword">get</span>() &#123;&#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">            <span class="keyword">if</span> (newValue === value) <span class="keyword">return</span>;</span><br><span class="line">            value = newValue;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在defineReactive方法中重写了对象的set方法。方法判断了设置的新值和旧值对比，如果发生了改变就更改数据的旧值。</p>
-</blockquote>
+> 在defineReactive方法中重写了对象的set方法。方法判断了设置的新值和旧值对比，如果发生了改变就更改数据的旧值。
+
 <blockquote>
 <p> 但是如果我们只这么做的话就会存在一些问题</p>
 </blockquote>
 <ul>
 <li>如果我们传递进来的vlue依旧是一个对象如何对这个对象进行当这个对象内部的key发生改变 是不能继续监听。列如一下的列子中对小猫的名字进行监测就是没有效果的<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">data, key, value</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//key = "cat"</span></span><br><span class="line">    <span class="comment">//value = &#123;name:"kitty" color:"white"&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>另外就是js属于弱引用类型，赋值不同的类型不会报错，如果我们将一个基本的数据类型更改为一个对象类型，那么这新的对象也是不能够监测变化的。列如以下的情况<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> student = <span class="string">"张三"</span></span><br><span class="line">student=&#123;</span><br><span class="line">  name:<span class="string">"张三"</span></span><br><span class="line">  grende:<span class="string">"男"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="所以针对以上情况会在数据传递进来之前以及数据被重新赋值以后判断当前的vualue是否为对象类型，如果是对象类型再次对该对象进行数据监听。"><a href="#所以针对以上情况会在数据传递进来之前以及数据被重新赋值以后判断当前的vualue是否为对象类型，如果是对象类型再次对该对象进行数据监听。" class="headerlink" title="所以针对以上情况会在数据传递进来之前以及数据被重新赋值以后判断当前的vualue是否为对象类型，如果是对象类型再次对该对象进行数据监听。"></a>所以针对以上情况会在数据传递进来之前以及数据被重新赋值以后判断当前的vualue是否为对象类型，如果是对象类型再次对该对象进行数据监听。</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">data, key, value</span>) </span>&#123;</span><br><span class="line">    observe(value); <span class="comment">//深度劫持</span></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(data, key, &#123;</span><br><span class="line">        <span class="keyword">get</span>() &#123;&#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">            <span class="keyword">if</span> (newValue === value) <span class="keyword">return</span>;</span><br><span class="line">            observe(newValue); <span class="comment">//深度劫持</span></span><br><span class="line">            value = newValue;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// observe方法会判断传入的数据是否为对象，如果为对象会继续构造Observe对象对数据进行甚多的劫持</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">observe</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> isObj = isObject(data);</span><br><span class="line">    <span class="keyword">if</span> (!isObj) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Observe(data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>到此关于对象的数据劫持基本上写完了一个简单流程。后续会继续写关于数组是如何实现的。</p>
-</blockquote>
+### 所以针对以上情况会在数据传递进来之前以及数据被重新赋值以后判断当前的vualue是否为对象类型，如果是对象类型再次对该对象进行数据监听。
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">data, key, value</span>) </span>&#123;</span><br><span class="line">    observe(value); <span class="comment">//深度劫持</span></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(data, key, &#123;</span><br><span class="line">        <span class="keyword">get</span>() &#123;&#125;,</span><br><span class="line">        <span class="keyword">set</span>(newValue) &#123;</span><br><span class="line">            <span class="keyword">if</span> (newValue === value) <span class="keyword">return</span>;</span><br><span class="line">            observe(newValue); <span class="comment">//深度劫持</span></span><br><span class="line">            value = newValue;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// observe方法会判断传入的数据是否为对象，如果为对象会继续构造Observe对象对数据进行甚多的劫持</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">observe</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> isObj = isObject(data);</span><br><span class="line">    <span class="keyword">if</span> (!isObj) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Observe(data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+> 到此关于对象的数据劫持基本上写完了一个简单流程。后续会继续写关于数组是如何实现的。
+
 </li>
 </ul>
 <blockquote>
@@ -232,12 +219,13 @@
 <p>proxy 可以监听数组的变化，也可以监听对象的变化，它监听的是整个对象,再重写get和set方法的时候可以接收几个参数，我们可以直接获取到那个对象的key发生了更改，而不用通过defineProperty去循环遍历可以提高很多性能。但是proxy是es6的新特性，兼容性不是太好</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Proxy</span>(obj, &#123;</span><br><span class="line">  <span class="keyword">get</span>: function(target, key, receiver) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>: function(target, key, value, receiver) &#123;</span><br><span class="line">  </span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</details>
+    </div>
+</div>
 
 
 
 
-
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
 
       
@@ -362,8 +350,8 @@
     </a>
   
   
-    <a href="/2018/07/16/es6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ES6学习笔记</div>
+    <a href="/2019/07/21/webpack-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">webpack 学习笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -406,7 +394,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 高萌
+    		&copy; 2020 common
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -493,7 +481,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
             
             <div class="clearfix"></div>

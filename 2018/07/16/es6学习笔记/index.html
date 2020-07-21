@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>ES6学习笔记 | common-blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="解构赋值… 展开运算符   …展开运算符可以把数组展开成 ， 链接的参数序列   12345let a &#x3D; [1,2,3,4,5]...a &#x2F;&#x2F;1,2,3,4,5&#x2F;&#x2F;数组拼接let a2 &#x3D; [6,7,8,9,0]let a3 &#x3D; [...a,...a2]&#x2F;&#x2F;[1,2,3,4,5,6,7,8,9,0]   箭头函数   箭头函数的表现形式 1234let fun &#x3D; (a,b) &#x3D;&gt;&amp;">
+  <meta name="description" content="查看全部                    解构赋值   … 展开运算符   …展开运算符可以把数组展开成 ， 链接的参数序列   12345let a &#x3D; [1,2,3,4,5]...a &#x2F;&#x2F;1,2,3,4,5&#x2F;&#x2F;数组拼接let a2 &#x3D; [6,7,8,9,0]let a3 &#x3D; [...a,...a2]&#x2F;&#x2F;[1,2,3,4,5,6,7,8,9,0]   箭头函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/07/16/es6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="common-blog">
-<meta property="og:description" content="解构赋值… 展开运算符   …展开运算符可以把数组展开成 ， 链接的参数序列   12345let a &#x3D; [1,2,3,4,5]...a &#x2F;&#x2F;1,2,3,4,5&#x2F;&#x2F;数组拼接let a2 &#x3D; [6,7,8,9,0]let a3 &#x3D; [...a,...a2]&#x2F;&#x2F;[1,2,3,4,5,6,7,8,9,0]   箭头函数   箭头函数的表现形式 1234let fun &#x3D; (a,b) &#x3D;&gt;&amp;">
+<meta property="og:description" content="查看全部                    解构赋值   … 展开运算符   …展开运算符可以把数组展开成 ， 链接的参数序列   12345let a &#x3D; [1,2,3,4,5]...a &#x2F;&#x2F;1,2,3,4,5&#x2F;&#x2F;数组拼接let a2 &#x3D; [6,7,8,9,0]let a3 &#x3D; [...a,...a2]&#x2F;&#x2F;[1,2,3,4,5,6,7,8,9,0]   箭头函数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-07-16T08:04:57.000Z">
-<meta property="article:modified_time" content="2020-07-20T06:11:29.232Z">
-<meta property="article:author" content="高萌">
+<meta property="article:modified_time" content="2020-07-20T08:47:31.770Z">
+<meta property="article:author" content="common">
 <meta property="article:tag" content="ES6">
 <meta name="twitter:card" content="summary">
   
@@ -51,19 +51,13 @@
 			<img src="" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">高萌</a></h1>
+		  <h1 class="header-author"><a href="/">common</a></h1>
 		</hgroup>
 		
 
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/">home</a></li>
-	        
-				<li><a href="/categories">categories</a></li>
-	        
-				<li><a href="/archives">archives</a></li>
-	        
 				<li><a href="/">主页</a></li>
 	        
 				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
@@ -111,16 +105,10 @@
 				<img src="" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">高萌</h1>
+			  <h1 class="header-author js-header-author">common</h1>
 			</hgroup>
 			
 			
-			
-				
-			
-				
-			
-				
 			
 				
 			
@@ -143,18 +131,12 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 20%"><a href="/">home</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/categories">categories</a></li>
-		        
-					<li style="width: 20%"><a href="/archives">archives</a></li>
-		        
-					<li style="width: 20%"><a href="/">主页</a></li>
-		        
-					<li style="width: 20%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -189,10 +171,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <details>
-
+        <div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        查看全部
+    </div>
+    <div class='spoiler-content'>
+        <blockquote>
+<p>解构赋值</p>
+</blockquote>
 <blockquote>
-<p>解构赋值<br>… 展开运算符 </p>
+<p>… 展开运算符 </p>
 <blockquote>
 <p>…展开运算符可以把数组展开成 <strong>，</strong> 链接的参数序列</p>
 </blockquote>
@@ -225,20 +213,14 @@
 <ul>
 <li>箭头函数一般适用于和this指向无关的应用场景，<br>书写非常简便<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//筛选出考试及格的分数</span></span><br><span class="line">  <span class="keyword">let</span> arr = [<span class="number">13</span>,<span class="number">45</span>,<span class="number">77</span>,<span class="number">4</span>,<span class="number">90</span>,<span class="number">45</span>,<span class="number">67</span>,<span class="number">89</span>,<span class="number">100</span>];</span><br><span class="line">  arr.filter(<span class="function"><span class="params">item</span>=&gt;</span>item &gt; <span class="number">60</span>);</span><br><span class="line">  <span class="comment">//[77, 90, 67, 89, 100]</span></span><br></pre></td></tr></table></figure></li>
 <li>对于需要使用到上下文中的this的时候，使用箭头函数一定要注意<strong>this</strong>的指向问题<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如果在箭头函数中  通常我们会使用_this 把this保存下来</span></span><br><span class="line">  func()&#123;</span><br><span class="line">    <span class="keyword">let</span> _this = <span class="keyword">this</span>;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(_this)</span><br><span class="line">    &#125;,<span class="number">100</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>set 集合</p>
-</blockquote>
-</li>
+> set 集合</li>
 </ul>
 </li>
 <li><p>创建集合</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> <span class="keyword">set</span>();</span><br><span class="line">let s2 = new <span class="keyword">set</span>([1,2,3]);</span><br></pre></td></tr></table></figure></li>
 <li><p>集合的操作</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取集合的长度</span></span><br><span class="line">s.size()<span class="comment">//类比数组的length</span></span><br><span class="line"><span class="comment">//添加新元素</span></span><br><span class="line">s.add(<span class="number">5</span>)<span class="comment">//类比数组的push</span></span><br><span class="line"><span class="comment">//删除元素</span></span><br><span class="line">s.delete(<span class="number">1</span>)<span class="comment">//类比数组的 splice()</span></span><br><span class="line"><span class="comment">//判断是否存在某个元素</span></span><br><span class="line"><span class="keyword">set</span>.has(1)//存在 true 否则 false</span><br><span class="line">//清空数据</span><br><span class="line">s.clear()//</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>set的应用</p>
-</blockquote>
-</li>
+> set的应用</li>
 <li><p>数组去重</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> result =[...new <span class="keyword">set</span>(a)]</span><br></pre></td></tr></table></figure></li>
 <li><p>数组取交集</p>
@@ -250,11 +232,12 @@
 <p>map</p>
 </blockquote>
 <ul>
-<li><p>map类似于对象，也是键值对的集合，但是键的类型可以为任意类型</p>
- </details>
-</li>
+<li>map类似于对象，也是键值对的集合，但是键的类型可以为任意类型</li>
 </ul>
 
+    </div>
+</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
 
       
@@ -358,11 +341,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/10/vue/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/07/21/webpack-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          手写vue数据绑定-数据劫持
+          webpack 学习笔记
         
       </div>
     </a>
@@ -412,7 +395,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 高萌
+    		&copy; 2020 common
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -499,7 +482,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">echarts</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
             
             <div class="clearfix"></div>
