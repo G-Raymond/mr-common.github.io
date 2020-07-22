@@ -474,7 +474,80 @@
         查看全部
     </div>
     <div class='spoiler-content'>
-        No content to show
+        <blockquote>
+<p>weboack 五个核心概念</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.export=&#123;</span><br><span class="line">  mode:<span class="string">"development"</span>/<span class="string">"prodection"</span><span class="comment">//配置开发模式</span></span><br><span class="line">  entry:<span class="string">""</span><span class="comment">//文件入口</span></span><br><span class="line">  output:&#123;</span><br><span class="line">    filename:<span class="string">""</span>,<span class="comment">//输出文件名</span></span><br><span class="line">    path:<span class="string">""</span><span class="comment">//输出路径</span></span><br><span class="line">  &#125;,<span class="comment">//</span></span><br><span class="line">  <span class="built_in">module</span>:&#123;</span><br><span class="line">    rlues:[]</span><br><span class="line">  &#125;,<span class="comment">//配置使用的loader</span></span><br><span class="line">  plugins:[]<span class="comment">//配置使用的插件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>打包样式资源</p>
+</blockquote>
+<blockquote>
+<p>打包html资源</p>
+</blockquote>
+<blockquote>
+<p>打包图片资源</p>
+</blockquote>
+<ul>
+<li>url-loader 处理图片资源 采用es6module 进行解析<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test:<span class="regexp">/\.(jpg|png|gif)$/</span>,</span><br><span class="line">  laoder:<span class="string">'url-loader'</span>,</span><br><span class="line">  options:&#123;</span><br><span class="line">    limit:   <span class="comment">//限制图的大小 超过打包图片不超过 以base64编码 引入到项目中</span></span><br><span class="line">    name:[name][hash:<span class="number">10</span>].[ext]<span class="comment">//打包出图片的名字 防止重复一般带上hash值 </span></span><br><span class="line">     esMoudle:<span class="literal">false</span> <span class="comment">//we</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>file-loader 处理html中img的资源 采用commonJS进行解析<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test: <span class="regexp">/\.(jgp|png|git)$/</span>,</span><br><span class="line">  loader:<span class="string">'file-loader'</span>,</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+> 打包其他资源</li>
+<li>file-loader<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  exclude:<span class="regexp">/\.(html|js|css|less|scss|)$/</span>,</span><br><span class="line">  loader:<span class="string">'file-loader'</span></span><br><span class="line">  options:&#123;</span><br><span class="line">    name:<span class="string">'[hash10].[ext]'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>devServer</p>
+</blockquote>
+<ul>
+<li>webppack-dev-server<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">  contentBase: resolve(__dirname,<span class="string">'build'</span>),</span><br><span class="line">  commpress: <span class="literal">true</span>,<span class="comment">//开启gzip压缩</span></span><br><span class="line">  port: <span class="number">3000</span>,<span class="comment">//设置端口号</span></span><br><span class="line">  open: <span class="literal">true</span> <span class="comment">// 自动打开</span></span><br><span class="line">  <span class="comment">//。。。。。</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>提取css为单独文件</p>
+</blockquote>
+<ul>
+<li>mini-css-extract-plugin <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//头部导入</span></span><br><span class="line"><span class="keyword">const</span> MiniCssExtractPlugin = <span class="built_in">require</span>(<span class="string">'mini-css-extract-plugin'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//在loader中  style-loader会将css插入js代码中  </span></span><br><span class="line"><span class="comment">//但是MiniCssExtractPlugin会把css 单独提取出文件 两者相冲突</span></span><br><span class="line"><span class="comment">//所以在loader中用MiniCssExtractPlugin.loader代替 style-loader</span></span><br><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">  rules:[</span><br><span class="line">    &#123;</span><br><span class="line">      test:<span class="regexp">/\.css$/</span>,</span><br><span class="line">      use:[MiniCssExtractPlugin.loader, <span class="string">'css-loader'</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pligins:[</span><br><span class="line">  <span class="keyword">new</span> MiniCssExtractPlugin(&#123;</span><br><span class="line">    filename:<span class="string">'/css/build.css'</span><span class="comment">//对文件的的打包重命名</span></span><br><span class="line">  &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>css 兼容处理</p>
+</blockquote>
+<ul>
+<li>postcss post-loader postcss-preset-env<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p>压缩css</p>
+</blockquote>
+<blockquote>
+<p>eslint 语法检测</p>
+</blockquote>
+<blockquote>
+<p>压缩html和js</p>
+</blockquote>
+<blockquote>
+<p>生产环境基本配置</p>
+</blockquote>
+<blockquote>
+<p>性能优化介绍</p>
+</blockquote>
+<blockquote>
+<p>HMR</p>
+</blockquote>
+<blockquote>
+<p>source-map</p>
+</blockquote>
+<blockquote>
+<p>缓存</p>
+</blockquote>
+<blockquote>
+<p>tree shaking</p>
+</blockquote>
+
     </div>
 </div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
@@ -555,16 +628,13 @@
     </div>
     <div class='spoiler-content'>
         <blockquote>
-<p>解构赋值</p>
-</blockquote>
-<blockquote>
 <p>… 展开运算符 </p>
-<blockquote>
-<p>…展开运算符可以把数组展开成 <strong>，</strong> 链接的参数序列</p>
 </blockquote>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">...a <span class="comment">//1,2,3,4,5</span></span><br><span class="line"><span class="comment">//数组拼接</span></span><br><span class="line"><span class="keyword">let</span> a2 = [<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">0</span>]</span><br><span class="line"><span class="keyword">let</span> a3 = [...a,...a2]<span class="comment">//[1,2,3,4,5,6,7,8,9,0]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>…展开运算符可以把数组展开成 <strong>，</strong> 链接的参数序列<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">...a <span class="comment">//1,2,3,4,5</span></span><br><span class="line"><span class="comment">//数组拼接</span></span><br><span class="line"><span class="keyword">let</span> a2 = [<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">0</span>]</span><br><span class="line"><span class="keyword">let</span> a3 = [...a,...a2]<span class="comment">//[1,2,3,4,5,6,7,8,9,0]</span></span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 <blockquote>
 <p>箭头函数</p>
 </blockquote>
@@ -607,10 +677,18 @@
 </li>
 </ul>
 <blockquote>
-<p>map</p>
+<p>class</p>
 </blockquote>
 <ul>
+<li>通过class关键字可以定义一个类，他的作用只是让对象原型的写法更清晰，与面向对象编程更加相似，其功能用es5也是可以做到的。书写方式如下<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name,number)&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.number = number;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//定义的方法   方法只能以这中形式存在</span></span><br><span class="line">  <span class="comment">//不能使用 study=function()&#123;&#125;</span></span><br><span class="line">  introduce()&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`姓名是<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>,学号是<span class="subst">$&#123;<span class="keyword">this</span>.number&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  <span class="keyword">let</span> s = <span class="keyword">new</span> Student();</span><br><span class="line">  s.introduce();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>这种通过创建类创建的函数用es5的实现方式如下<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">student.prototype.introduce=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li>类的构造函数一定要使用<strong>new</strong>，否者会报错<blockquote>
+<p>map</p>
+</blockquote>
+</li>
 <li>map类似于对象，也是键值对的集合，但是键的类型可以为任意类型</li>
+<li>static 修饰符 修饰的方式为静态方法，只能通类名去调用<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span><br><span class="line"><span class="keyword">constructor</span>(name,number)&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.number = number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> gotoSchool()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> Student();</span><br><span class="line">s.gotoSchool();<span class="comment">//不可以</span></span><br><span class="line">Student.gotoSchool()<span class="comment">//可以</span></span><br></pre></td></tr></table></figure></li>
+<li>类的继承</li>
 </ul>
 
     </div>
