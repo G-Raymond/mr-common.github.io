@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>echarts 随笔 | common-blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="查看全部                   统计的的描述有时候只能显示整数12345678910 yAxis: [   &amp;#123;     type: &#39;value&#39;,    axisLabel: &amp;#123;      formatter: function (v) &amp;#123;        return parseInt(v)&#x2F;&#x2F;表示整数。其他数值类型以此类推">
+  <meta name="description" content="查看全部                    legend 不显示问题  legend的名字一定要与series 中的name 保持一致 12345 legend:[&#39;hello&#39;] series: [  &amp;#123;    name: &#39;hello&#39;&amp;#125;    统计的的描述有时候只能显示整数  方式1 12345678910 yAxis: [   &amp;#123">
 <meta property="og:type" content="article">
 <meta property="og:title" content="echarts 随笔">
 <meta property="og:url" content="http://yoursite.com/2020/07/14/echarts/index.html">
 <meta property="og:site_name" content="common-blog">
-<meta property="og:description" content="查看全部                   统计的的描述有时候只能显示整数12345678910 yAxis: [   &amp;#123;     type: &#39;value&#39;,    axisLabel: &amp;#123;      formatter: function (v) &amp;#123;        return parseInt(v)&#x2F;&#x2F;表示整数。其他数值类型以此类推">
+<meta property="og:description" content="查看全部                    legend 不显示问题  legend的名字一定要与series 中的name 保持一致 12345 legend:[&#39;hello&#39;] series: [  &amp;#123;    name: &#39;hello&#39;&amp;#125;    统计的的描述有时候只能显示整数  方式1 12345678910 yAxis: [   &amp;#123">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-14T08:44:01.000Z">
-<meta property="article:modified_time" content="2020-08-03T04:01:58.691Z">
+<meta property="article:modified_time" content="2020-08-03T09:10:28.112Z">
 <meta property="article:author" content="common">
 <meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
@@ -176,7 +176,21 @@
         查看全部
     </div>
     <div class='spoiler-content'>
-        <h3 id="统计的的描述有时候只能显示整数"><a href="#统计的的描述有时候只能显示整数" class="headerlink" title="统计的的描述有时候只能显示整数"></a>统计的的描述有时候只能显示整数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> yAxis: [</span><br><span class="line">   &#123; </span><br><span class="line">    type: <span class="string">'value'</span>,</span><br><span class="line">    axisLabel: &#123;</span><br><span class="line">      formatter: <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">parseInt</span>(v)<span class="comment">//表示整数。其他数值类型以此类推</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+        <ul>
+<li><p>legend 不显示问题</p>
+<ul>
+<li>legend的名字一定要与series 中的name 保持一致 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> legend:[<span class="string">'hello'</span>]</span><br><span class="line"> </span><br><span class="line">series: [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'hello'</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>统计的的描述有时候只能显示整数</p>
+</li>
+<li><p>方式1</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> yAxis: [</span><br><span class="line">   &#123; </span><br><span class="line">    type: <span class="string">'value'</span>,</span><br><span class="line">    axisLabel: &#123;</span><br><span class="line">      formatter: <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">parseInt</span>(v)<span class="comment">//表示整数。其他数值类型以此类推</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方式2</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minInterval：<span class="number">1</span><span class="comment">//这是最小刻度为1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 
     </div>
 </div>
